@@ -114,6 +114,44 @@ void setTest(){
         cout<< '('<<(*it).d_X<<','<< (*it).d_Y<<')'<<endl;
     }
     cout<<endl;
+
+    vector<vector<double>> tableau2D;
+    vector<vector<double>>::iterator itTableau2D = tableau2D.begin();
+
+    vector<double> test1;
+    vector<double> test2;
+    vector<double> test3;
+    vector<double> test4;
+
+    test1.push_back(1.0);
+    test1.push_back(2.0);
+    test1.push_back(3.0);
+    tableau2D.push_back(test1);
+
+    test2.push_back(4.0);
+    test2.push_back(5.0);
+    test2.push_back(6.0);
+    tableau2D.push_back(test2);
+
+    test3.push_back(1.1);
+    test3.push_back(2.2);
+    test3.push_back(3.3);
+    tableau2D.push_back(test3);
+
+    test4.push_back(4.4);
+    test4.push_back(5.5);
+    test4.push_back(6.6);
+    tableau2D.push_back(test4);
+
+    for(vector<double> t : tableau2D)
+    {
+        for(double d : t)
+        {
+            cout << d << '\t';
+        }
+
+        cout << endl;
+    }
 }
 
 int main(int argc, char *argv[])
