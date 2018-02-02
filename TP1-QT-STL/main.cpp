@@ -4,13 +4,17 @@
 #include <iterator>
 #include <algorithm>
 #include <vector>
-#include<set>
+#include <set>
+#include <cmath>
 using namespace std;
 
 struct S_Coord {
     double d_X;
     double d_Y;
 } ;
+
+// Prototypes
+vector<vector<double>> calculEuclidienne(set<S_Coord> s_d_set);
 
 bool operator<(const S_Coord & s1, const S_Coord & s2)
 {
@@ -82,10 +86,10 @@ void vectorTest(){
 
 void setTest(){
     set<S_Coord> s_d_set;
-    set<S_Coord>::iterator it = s_d_set.begin();
+    set<S_Coord>::iterator it;
     bool isOK = false;
 
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < 5; i++){
         S_Coord s_Coord;
 
         s_Coord.d_X = i;
@@ -113,45 +117,72 @@ void setTest(){
     for(it = s_d_set.begin(); it != s_d_set.end(); it++){
         cout<< '('<<(*it).d_X<<','<< (*it).d_Y<<')'<<endl;
     }
-    cout<<endl;
+    cout << endl;
 
     vector<vector<double>> tableau2D;
-    vector<vector<double>>::iterator itTableau2D = tableau2D.begin();
+    tableau2D = calculEuclidienne(s_d_set);
 
-    vector<double> test1;
-    vector<double> test2;
-    vector<double> test3;
-    vector<double> test4;
-
-    test1.push_back(1.0);
-    test1.push_back(2.0);
-    test1.push_back(3.0);
-    tableau2D.push_back(test1);
-
-    test2.push_back(4.0);
-    test2.push_back(5.0);
-    test2.push_back(6.0);
-    tableau2D.push_back(test2);
-
-    test3.push_back(1.1);
-    test3.push_back(2.2);
-    test3.push_back(3.3);
-    tableau2D.push_back(test3);
-
-    test4.push_back(4.4);
-    test4.push_back(5.5);
-    test4.push_back(6.6);
-    tableau2D.push_back(test4);
+     cout << "Distances of points" << endl;
 
     for(vector<double> t : tableau2D)
     {
         for(double d : t)
         {
-            cout << d << '\t';
+            cout << d << '\t' << '\t';
         }
 
         cout << endl;
     }
+
+    int A, B;
+
+    cout << "Enter 2 integers of positions of points : " << endl;
+    cout << '\t' << "A : ";
+    cin >> A;
+    cout << '\t' << "B : ";
+    cin >> B;
+
+    if(A < tableau2D.size() && A >= 0){
+         if(B < tableau2D[A].size() && B >= 0) {
+             cout << "Distance of points : " << tableau2D[A][B] << endl;
+         }else{
+             cout << "Error ! Out of range!" << endl;
+             exit(0);
+         }
+    }else{
+        cout << "Error ! Out of range!" << endl;
+        exit(0);
+    }
+
+
+}
+
+vector<vector<double>> calculEuclidienne(set<S_Coord> s_d_set)
+{
+    vector<vector<double>> tableau2D;
+    vector<double> vec;
+    set<S_Coord>::iterator it1, it2;
+
+    if(s_d_set.empty())
+    {
+            cout << "Tableau vide" << endl;
+            exit(0);
+    }
+
+    double dis;
+
+    // Loop 1 time data point
+    for(it1 = s_d_set.begin(); it1 != s_d_set.end(); it1++) {
+        // Loop 10 times to calculate the distances
+        for(it2 = s_d_set.begin(); it2 != s_d_set.end(); it2++) {
+            dis = sqrt(pow(((*it1).d_X - (*it2).d_X), 2) + pow(((*it1).d_Y - (*it2).d_Y), 2));
+            vec.push_back(dis);
+        }
+        tableau2D.push_back(vec);
+        vec.clear();
+    }
+
+    return tableau2D;
 }
 
 int main(int argc, char *argv[])
