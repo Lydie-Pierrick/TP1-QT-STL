@@ -6,6 +6,8 @@
 #include <vector>
 #include <set>
 #include <cmath>
+#include <map>
+
 using namespace std;
 
 struct S_Coord {
@@ -20,7 +22,7 @@ bool operator<(const S_Coord & s1, const S_Coord & s2)
 {
     return s1.d_X < s2.d_X;
 }
-void vectorTest(){
+void vectorFunction(){
     vector<int>  v_i_vector;
     cout << "Enter 5 integers :"<<endl;
     int n;
@@ -84,7 +86,7 @@ void vectorTest(){
     }
 }
 
-void setTest(){
+void setFunction(){
     set<S_Coord> s_d_set;
     set<S_Coord>::iterator it;
     bool isOK = false;
@@ -142,8 +144,8 @@ void setTest(){
     cout << '\t' << "B : ";
     cin >> B;
 
-    if(A < tableau2D.size() && A >= 0){
-         if(B < tableau2D[A].size() && B >= 0) {
+    if(A < (int)tableau2D.size() && A >= 0){
+         if(B < (int)tableau2D[A].size() && B >= 0) {
              cout << "Distance of points : " << tableau2D[A][B] << endl;
          }else{
              cout << "Error ! Out of range!" << endl;
@@ -185,12 +187,64 @@ vector<vector<double>> calculEuclidienne(set<S_Coord> s_d_set)
     return tableau2D;
 }
 
-int main(int argc, char *argv[])
+void multimapFunction()
 {
-    QCoreApplication a(argc, argv);
+    int key;
+    string strKey, strValue;
+    multimap<int,string> myMultiMap;
+    multimap<int,string>::iterator it;
 
-    //vectorTest();
-    setTest();
+    while(true)
+    {
+        cout << "Enter your key or end to exit : ";
+        cin >> strKey;
 
-    return a.exec();
+        if(strKey == "end")
+            break;
+
+        key = stoi(strKey);
+
+        cout << "Enter your value : ";
+        cin >> strValue;
+
+        myMultiMap.insert(pair<int,string>(key, strValue));
+    }
+
+    cout << endl << "Display line of multimap :" << endl;
+
+    cout << "key" << "\t" << "value" << endl;
+
+    for(it = myMultiMap.begin(); it != myMultiMap.end(); it++)
+    {
+        cout << it->first << "\t" << it->second << endl;
+    }
+
+    while(true) {
+        cout << "Enter key to find : ";
+        cin >> strKey;
+        key = stoi(strKey);
+
+        if(key == 0)
+            break;
+
+        // Revoir pour multiple valeurs
+        cout << endl << myMultiMap.upper_bound(key)->second << endl;
+    }
+
+    while(true) {
+        cout << "Enter value to find : ";
+        cin >> strValue;
+
+        if(strValue == "end")
+            break;
+
+        cout << endl << myMultiMap.upper_bound(key)->second << endl;
+    }
+}
+
+int main()
+{
+    //vectorFunction();
+    //setFunction();
+    multimapFunction();
 }
