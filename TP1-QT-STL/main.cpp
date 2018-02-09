@@ -219,32 +219,75 @@ void multimapFunction()
         cout << it->first << "\t" << it->second << endl;
     }
 
+    // Find with key :
+
+    typedef multimap<int, string>::iterator MMAPIterator;
+
+    pair<MMAPIterator, MMAPIterator> result;
+
+    bool findKey;
+
     while(true) {
+        findKey = false;
         cout << "Enter key to find : ";
         cin >> strKey;
+
         key = stoi(strKey);
 
         if(key == 0)
             break;
 
-        // Revoir pour multiple valeurs
-        cout << endl << myMultiMap.upper_bound(key)->second << endl;
+        result = myMultiMap.equal_range(key);
+
+        cout << "All values for key : " << key << " :" << endl;
+        for (it = result.first; it != result.second; it++)
+        {
+            findKey = true;
+            cout << it->second << endl;
+        }
+
+        if(findKey == false) {
+            cout << "Not found but upper bound key : " << endl;
+            cout << myMultiMap.upper_bound(key)->second << endl;
+        }
     }
 
+    // Find with value :
+
+    bool findValue;
+
     while(true) {
+        findValue = false;
         cout << "Enter value to find : ";
         cin >> strValue;
 
         if(strValue == "end")
             break;
 
-        cout << endl << myMultiMap.upper_bound(key)->second << endl;
+        for (it = myMultiMap.begin(); it != myMultiMap.end(); ++it)
+        {
+            if((it->second) == strValue) {
+                findValue = true;
+                cout << (*it).first << endl;
+            }
+        }
+
+        if(findValue == false)
+            cout << "Not found!" << endl;
+
+        /*
+        if(myMultiMap.find(strValue)->first == strValue)
+            cout << endl << myMultiMap.find(strValue)->first << endl;
+        else
+            cout << "Not Found!" << endl;*/
     }
 }
 
-int main()
+// Old main! You can find new main at mainproject.cpp
+/*int main()
 {
     //vectorFunction();
     //setFunction();
     multimapFunction();
 }
+*/
