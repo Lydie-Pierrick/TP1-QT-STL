@@ -189,7 +189,6 @@ vector<vector<double>> calculEuclidienne(set<S_Coord> s_d_set)
 
 void multimapFunction()
 {
-    int key;
     string strKey, strValue;
     multimap<int,string> myMultiMap;
     multimap<int,string>::iterator it;
@@ -324,7 +323,7 @@ void multimapFunction()
     }
 
 
-    for(int i = 0; i < vecMaps.size(); i++){
+    for(unsigned int i = 0; i < vecMaps.size(); i++){
        // cout<<vecMaps[i]->first<<"\t"<<vecMaps[i]->second<<endl;
     }
 
