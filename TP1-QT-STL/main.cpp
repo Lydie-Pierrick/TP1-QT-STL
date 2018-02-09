@@ -194,6 +194,8 @@ void multimapFunction()
     multimap<int,string> myMultiMap;
     multimap<int,string>::iterator it;
 
+
+    /*
     while(true)
     {
         cout << "Enter your key or end to exit : ";
@@ -264,23 +266,76 @@ void multimapFunction()
         if(strValue == "end")
             break;
 
-        for (it = myMultiMap.begin(); it != myMultiMap.end(); ++it)
-        {
-            if((it->second) == strValue) {
-                findValue = true;
-                cout << (*it).first << endl;
-            }
-        }
 
-        if(findValue == false)
-            cout << "Not found!" << endl;
-
-        /*
-        if(myMultiMap.find(strValue)->first == strValue)
-            cout << endl << myMultiMap.find(strValue)->first << endl;
-        else
-            cout << "Not Found!" << endl;*/
     }
+    */
+
+    // Suppression
+
+    myMultiMap.insert(pair<int,string>(1, "add"));
+    myMultiMap.insert(pair<int,string>(2, "baa"));
+    myMultiMap.insert(pair<int,string>(3, "gaa"));
+    myMultiMap.insert(pair<int,string>(4, "cd"));
+    myMultiMap.insert(pair<int,string>(5, "edd"));
+    myMultiMap.insert(pair<int,string>(6, "htht"));
+
+    cout << "Enter value to delete : ";
+    cin >> strValue;
+
+    int sizeStr = strValue.size();
+    vector<string> resultStr;
+    string str;
+
+    if(sizeStr > 1)
+    {
+        for(int i = 0; i < sizeStr; i++){
+            str = strValue.substr(i, 1);
+            resultStr.push_back(str);
+        }
+    }else{
+        resultStr.push_back(strValue);
+    }
+
+
+    /*
+    for(string s : resultStr){
+        cout<<s<<endl;
+    }
+    */
+
+
+    string strFind;
+    vector<multimap<int,string>> vecMaps;
+
+    for (it = myMultiMap.begin(); it != myMultiMap.end(); it++)
+    {
+
+        strFind = it->second; // strFind = value
+        for(string s : resultStr)
+        {
+            cout<<"hello1"<<endl;
+           if (strFind.find(s) == strFind.npos) // if we find
+           {
+               cout<<"hello2"<<endl;
+               //vecMaps.push_back((*it));
+               //myMultiMap.erase(it);
+           }
+       }
+    }
+
+
+    for(int i = 0; i < vecMaps.size(); i++){
+       // cout<<vecMaps[i]->first<<"\t"<<vecMaps[i]->second<<endl;
+    }
+
+
+    /*
+    for(it = myMultiMap.begin(); it != myMultiMap.end(); it++)
+    {
+        cout << it->first << "\t" << it->second << endl;
+    }
+    */
+
 }
 
 // Old main! You can find new main at mainproject.cpp
