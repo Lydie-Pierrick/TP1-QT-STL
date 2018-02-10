@@ -1,9 +1,9 @@
 #include "client.h"
 
 Client::Client(string lastName, string firstName, string addr, string city, string comments, int telephone,
-               int postalCode, int duration, int priority):
+               int postalCode, int duration, int priority, vector <int> idRes):
     lastName(lastName), firstName(firstName), addr(addr), city(city), comments(comments),
-    telephone(telephone), postalCode(postalCode), duration(duration), priority(priority)
+    telephone(telephone), postalCode(postalCode), duration(duration), priority(priority), idRes(idRes)
 {
 
 }
@@ -98,12 +98,12 @@ void Client::setPriority(int value)
     priority = value;
 }
 
-vector<int> Client::getIdRes() const
+vector<int> Client::getIdRes()
 {
     return idRes;
 }
 
-void Client::setIdRes(const vector<int> &value)
+void Client::setIdRes(vector<int> &value)
 {
     idRes = value;
 }

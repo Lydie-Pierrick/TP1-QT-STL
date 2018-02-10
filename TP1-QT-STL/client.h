@@ -19,10 +19,10 @@ private:
     int postalCode;
     int duration;
     int priority;
-    vector <int> idRes;
+    vector<int> idRes;
 public:
     Client(string lastName, string firstName, string addr, string city, string comments, int telephone,
-                   int postalCode, int duration, int priority);
+                   int postalCode, int duration, int priority, vector<int> idRes);
     string getAddr() const;
     void setAddr(const string &value);
     string getLastName() const;
@@ -41,8 +41,9 @@ public:
     void setDuration(int value);
     int getPriority() const;
     void setPriority(int value);
-    vector<int> getIdRes() const;
-    void setIdRes(const vector<int> &value);
+
+    vector<int> getIdRes();
+    void setIdRes(vector<int> &value);
 };
 
 #endif // PATIENT_H
